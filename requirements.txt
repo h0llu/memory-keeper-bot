@@ -1,0 +1,4 @@
+aiogram>=3.0.0b4
+pydantic
+python-dotenv
+nextcloud-api-wrapper
