@@ -26,7 +26,7 @@ async def download_small_photo(message: Message, bot: Bot):
         destination=destination,
     )
 
-    logger.success(f"Aiogram - Downloaded small photo to {destination}")
+    logger.info(f"Aiogram - Downloaded small photo to {destination}")
 
     upload_to_cloud(file_path=destination)
 
@@ -44,7 +44,7 @@ async def download_small_video(message: Message, bot: Bot):
         destination=destination,
     )
 
-    logger.success(f"Aiogram - Downloaded small video to {destination}")
+    logger.info(f"Aiogram - Downloaded small video to {destination}")
 
     upload_to_cloud(file_path=destination)
 
@@ -73,7 +73,7 @@ async def download_large_media(message: Message):
         logger.error(f"Telethon - Large media (file_id={file_id}) was not downloaded")
         return
 
-    logger.success(f"Telethon - Downloaded large media to {media_path}")
+    logger.info(f"Telethon - Downloaded large media to {media_path}")
 
     upload_to_cloud(file_path=media_path)
 

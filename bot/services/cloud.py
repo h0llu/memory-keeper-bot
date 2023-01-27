@@ -13,4 +13,4 @@ def upload_to_cloud(file_path):
         nxc.upload_file(
             file_path, dotenv_config.nextcloud_folder + file_path.split("/")[-1]
         )
-    logger.success(f"Nextcloud - Uploaded media from {file_path}")
+    logger.info(f"Nextcloud - Uploaded media from {file_path}")
