@@ -3,7 +3,7 @@ from datetime import datetime
 
 from aiogram import Bot, F, Router
 from aiogram.types import Message
-from data.dotenv_reader import dotenv_config
+from data.config import TELETHON_SESSION_PATH, TG_API_HASH, TG_API_ID
 from loguru import logger
 from services.cloud import upload_to_cloud
 from states.sync_states import Sync
@@ -58,9 +58,9 @@ async def download_large_media(message: Message):
     media_path = None
 
     async with TelegramClient(
-        dotenv_config.telethon_session_path,
-        api_id=dotenv_config.api_id,
-        api_hash=dotenv_config.api_hash.get_secret_value(),
+        TELETHON_SESSION_PATH,
+        api_id=TG_API_ID,
+        api_hash=TG_API_HASH,
     ) as app:
         result = await app(
             functions.messages.GetMessagesRequest(id=[message.message_id])

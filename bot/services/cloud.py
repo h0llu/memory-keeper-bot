@@ -1,16 +1,19 @@
-from data.dotenv_reader import dotenv_config
+from data.config import (
+    NEXTCLOUD_FOLDER,
+    NEXTCLOUD_PASSWORD,
+    NEXTCLOUD_URL,
+    NEXTCLOUD_USERNAME,
+)
 from loguru import logger
 from nextcloud import NextCloud
 
 
 def upload_to_cloud(file_path):
     with NextCloud(
-        endpoint=dotenv_config.nextcloud_url,
-        user=dotenv_config.nextcloud_username,
-        password=dotenv_config.nextcloud_password.get_secret_value(),
+        endpoint=NEXTCLOUD_URL,
+        user=NEXTCLOUD_USERNAME,
+        password=NEXTCLOUD_PASSWORD,
         session_kwargs={"verify": True},
     ) as nxc:
-        nxc.upload_file(
-            file_path, dotenv_config.nextcloud_folder + file_path.split("/")[-1]
-        )
+        nxc.upload_file(file_path, NEXTCLOUD_FOLDER + file_path.split("/")[-1])
     logger.info(f"Nextcloud - Uploaded media from {file_path}")

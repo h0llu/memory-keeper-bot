@@ -6,6 +6,7 @@ from aiogram.fsm.storage.redis import RedisStorage
 from aiogram.fsm.strategy import FSMStrategy
 from data import config
 from loguru import logger
+from redis import Redis
 
 
 def init():
@@ -25,8 +26,17 @@ def dispatcher_setup(dp: Dispatcher):
 
 async def main():
     bot = Bot(config.BOT_TOKEN, parse_mode="HTML")
-    # storage = RedisStorage(**config.redis)
-    dp = Dispatcher(storage=MemoryStorage(), fsm_strategy=FSMStrategy.CHAT)
+    # dp = Dispatcher(storage=MemoryStorage(), fsm_strategy=FSMStrategy.CHAT)
+
+    storage = RedisStorage(
+        Redis(
+            host=config.REDIS_HOST,
+            port=config.REDIS_PORT,
+            password=config.REDIS_PASSWORD,
+            db=config.REDIS_DB,
+        )
+    )
+    dp = Dispatcher(storage=storage, fsm_strategy=FSMStrategy.CHAT)
 
     init()
     dispatcher_setup(dp)
