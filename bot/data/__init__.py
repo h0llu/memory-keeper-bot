@@ -1,1 +1,1 @@
-from . import config, dotenv_reader, message_texts
+from . import config, message_texts

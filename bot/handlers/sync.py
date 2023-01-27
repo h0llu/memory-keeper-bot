@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 
 from aiogram import Bot, F, Router
+from aiogram.filters import StateFilter
 from aiogram.types import Message
 from data.config import TELETHON_SESSION_PATH, TG_API_HASH, TG_API_ID
 from loguru import logger
@@ -10,10 +11,8 @@ from states.sync_states import Sync
 from telethon import TelegramClient, functions
 
 router = Router()
-router.message.filter(
-    Sync.synching,
-    ~F.forward_from_chat,
-)
+
+router.message.filter(~F.forward_from_chat, ~StateFilter(Sync.not_synching))
 
 
 @router.message(F.photo, F.photo[-1].file_size < 19000000)
