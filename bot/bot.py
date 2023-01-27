@@ -1,11 +1,9 @@
 import asyncio
 
-from aiogram import Bot, Dispatcher, types
-from aiogram.filters import Command
+from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.storage.redis import RedisStorage
 from aiogram.fsm.strategy import FSMStrategy
-from aiogram.types import Message
 from data import config
 from loguru import logger
 
@@ -19,9 +17,7 @@ def init():
 def dispatcher_setup(dp: Dispatcher):
     import filters
     import handlers
-    import middlewares
 
-    middlewares.setup(dp)
     filters.setup(dp)
     handlers.setup(dp)
     logger.success("Successfully set up dispatcher")
