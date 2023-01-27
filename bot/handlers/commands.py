@@ -21,7 +21,7 @@ async def cmd_sync(message: Message, state: FSMContext):
     await message.answer("Синхронизация включена!")
 
 
-@router.message(Command(commands=["stop_sync"]))
+@router.message(Command(commands=["unsync"]))
 async def cmd_stop_sync(message: Message, state: FSMContext):
     await state.set_state(Sync.not_synching)
     logger.info("Sync is off")
