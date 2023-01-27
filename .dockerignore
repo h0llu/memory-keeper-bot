@@ -1,0 +1,21 @@
+# Cache
+**/__pycache/
+**/*.pyc
+**/*.pyo
+
+# Environment
+venv/
+.env
+
+# Git
+.gitignore
+.git/
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# Project
+**/*.md
+logs/*
+media/*

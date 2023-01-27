@@ -1,6 +1,9 @@
-venv/
-logs/
 __pycache__/
+venv/
 .env
+
+logs/
 media/
 telethon-session/
+
+docker-compose.yml
